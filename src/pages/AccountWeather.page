@@ -1,0 +1,16 @@
+<apex:page standardController="Account" extensions="AccountWeatherController" showHeader="false" sidebar="false">
+    <!-- 위의 extensions="AccountWeatherController"는 classes의 AccountWeatherController를 참고한다는 뜻이다. -->
+    <apex:pageBlock title="{!city} Weather">
+        <apex:pageMessages />
+        <apex:pageBlockSection >
+
+            <apex:outputText label="Description" value="{!description}"/>
+            <apex:outputText label="Temperature" value="{!temp}"/>
+            <apex:outputText label="Pressure" value="{!pressure}"/>
+            <apex:outputText label="Humidity" value="{!humidity}"/>
+            <apex:outputText label="Minimum Temperature" value="{!temp_min}"/>
+            <apex:outputText label="Maximum Temperature" value="{!temp_max}"/>
+
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

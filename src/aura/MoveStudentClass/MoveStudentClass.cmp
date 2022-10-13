@@ -1,0 +1,75 @@
+<aura:component description="MoveStudentClass"
+                controller="MoveStudentClassController"
+                implements="force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes">
+
+    <aura:html tag="style">
+        .slds-modal__footer {
+        min-width: 100% !important;
+        max-width: fit-content !important;
+        padding: 10px 20px;
+        margin: 20px 0px;
+        text-align: right;
+        }
+
+        .modal-body {
+        margin: 10px 0px;
+        }
+    </aura:html>
+
+    <!-- 초기화 -->
+    <aura:handler name="init" value="{!this}" action="{!c.fnInit}"/>
+
+    <!--변수선언-->
+    <aura:attribute name="recordId" type="String"/> <!-- Contact의 레코드의 Id -->
+    <aura:attribute name="selectedClass" type="String"/> <!-- 선택된 학급 -->
+    <aura:attribute name="classes" type="List" default="['학급 없음']"/>
+
+    <aura:attribute name="columns" type="List"/>
+
+    <div class="slds-col modal-header slds-modal__header">
+        반 이동
+    </div>
+
+    <!-- Lookup Search -->
+    <!--
+        * oninput = This event is sent when a user enters text in a textbox.
+                    This event is only called when the text displayed would change,
+                    thus it is not called when the user presses non-displayable keys.
+        * onkeyup = The keyup event is raised when the user releases a key that's been pressed.
+    -->
+    <div oninput="{! c.handleInput}" onkeyup="{! c.handleKeyUp }">
+        <lightning:input
+                aura:id="enter-search"
+                name="enter-search"
+                label="Search when user hits the 'enter' key"
+                type="search"
+                value="{!v.selectedClass}"
+        />
+    </div>
+
+    <!-- Lookup field 활용 -->
+    <lightning:recordEditForm objectApiName="Contact">
+        <lightning:inputField fieldName="Class__c" value="" />
+    </lightning:recordEditForm>
+
+    <!-- Combobox -->
+    <div class="slds-col modal-body">
+        <lightning:combobox name="selectedClass" label="반 선택" value="{!v.selectedClass}"
+                            placeholder="반을 선택하세요." options="{! v.classes }"/>
+    </div>
+
+    <!-- datatable -->
+    <div style="height: 300px">
+        <lightning:datatable
+                keyField="id"
+                data="{! v.classes }"
+                columns="{! v.columns }"
+                hideCheckboxColumn="true"/>
+    </div>
+
+    <div class="slds-col modal-footer slds-modal__footer">
+        <lightning:button variant="brand" label="이동" title="반 이동" onclick="{!c.handleChange}"/>
+        <lightning:button variant="neutral" title="취소" label="취소" onclick="{!c.fnCancel}"/>
+    </div>
+
+</aura:component>

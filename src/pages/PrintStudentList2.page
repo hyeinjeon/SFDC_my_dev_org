@@ -1,0 +1,74 @@
+
+<apex:page id="PrintStudentList2" controller="PrintStudentListController2" renderAs="pdf">
+    <html>
+    <head>
+        <style>
+            .page {
+                width : 850px;
+                height : 1130px;
+                font-family: 'Arial Unicode MS';
+            }
+            @page {
+                size: A4;
+                margin 0;
+            }
+            table, th, tr, td{
+                table-layout: fixed;
+                border-collapse: collapse;
+                border:black solid 1px;
+                font-size : 10pt;
+            }
+            .body{
+                font-family: 'Arial Unicode MS';
+            }
+            div.onepage {
+                page-break-before: always;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="page">
+        <div style="text-align:center;width:100%;font-size:28px;font-family:'Arial Unicode MS'">출석부 Sample</div>
+
+        <div style="margin-top:30px;padding-left:40%;font-family:'Arial Unicode MS'">
+            <!-- 2중 반복문 -->
+            <apex:variable var="order" value="{!1}" />
+            <apex:variable var="cnt" value="{!1}" />
+            <!-- 반복문 1 -->
+            <apex:repeat value="{!doubleListContact}" var="listObj">
+                <!--
+                     css 요소중 ‘한장’으로 인식 되도록 하는 스타일
+                        → page-break-after:always
+                -->
+                <!--
+                    IF문을 이용하여 마지막 장일 경우 다음 장으로 넘어가지 않도록(빈 장이 끝에 생기지 않도록) 설정
+                        -> {!IF(논리연산자, '','page-break-after:always')}
+                -->
+                <table style="border:black solid 1px;border-collapse:collapse;{!IF(doubleListContact.size == cnt, '','page-break-after:always')}">
+                    <tr>
+                        <td style="border:black solid 1px;">순번</td>
+                        <td style="border:black solid 1px;">이름</td>
+                        <td style="border:black solid 1px;">생년월일</td>
+                    </tr>
+                    <!-- 반복문 2 -->
+                    <apex:repeat value="{!listObj}" var="obj">
+                        <tr>
+                            <td style="border:black solid 1px;">{!order}</td>
+                            <td style="border:black solid 1px;">{!obj.LastName}</td>
+                            <td style="border:black solid 1px;">
+                                <apex:outputText value="{0,date,yyyy-MM-dd}">
+                                    <apex:param value="{!obj.Birthdate}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                        <apex:variable var="order" value="{!order + 1}" />
+                    </apex:repeat>
+                    <apex:variable var="cnt" value="{!cnt + 1}" />
+                </table>
+            </apex:repeat>
+        </div>
+    </div>
+    </body>
+    </html>
+
+</apex:page>
