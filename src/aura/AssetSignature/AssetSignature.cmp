@@ -1,0 +1,56 @@
+<!--
+ - Created by hyein on 2022-10-18.
+
+    <Component>
+       - 필수 요소로, 변수 선언 및 UI
+       - 화면 UI를 구성함
+-->
+
+<aura:component description="AssetSignature"
+                implements="force:hasRecordId,force:appHostable,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes"
+                access="global"
+                controller="SignatureController">
+
+    <aura:attribute name="field" type="string"/>
+    <aura:attribute name="value" type="string"/>
+
+    <ltng:require afterScriptsLoaded="{!c.fnInit}"/>
+
+
+    <aura:html tag="style">
+        .slds-modal__container{
+        min-width: 70% !important;
+        max-width: fit-content !important;
+        padding: 0 20px;
+        }
+        .slds-modal__content {
+        overflow-y: hidden !important;
+        height: unset !important;
+        max-height: unset !important;
+        }
+        .slds-modal__container .slds-modal__header .slds-modal__close {
+        visibility: hidden !important;
+        }
+    </aura:html>
+
+    <div class="slds-modal__container">
+        <div class="slds-col modal-header slds-modal__header">
+            Signature
+        </div>
+
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <div class="slds-align_absolute-center">
+                <canvas aura:id="canvas" width="240" height="120"
+                        style="border:2px solid; background: white;"></canvas>
+                <lightning:buttonIcon iconName="utility:delete" variant="bare" onclick="{!c.fnErase}"/>
+            </div>
+        </div>
+
+        <footer class="slds-modal__footer">
+            <lightning:button variant="brand" label="Erase" onclick="{!c.fnErase}"/>
+            <lightning:button variant="brand" label="Save" onclick="{!c.fnSave}"/>
+            <lightning:button variant="neutral" label="Cancel" onclick="{!c.fnCancel}"/>
+        </footer>
+    </div>
+
+</aura:component>

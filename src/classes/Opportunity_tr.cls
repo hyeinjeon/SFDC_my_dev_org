@@ -1,6 +1,15 @@
 /**
- * Created by hyein on 2022-08-29.
+ * @description       :
+ *
+ * @author            : hyein.jeon@daeunextier.com
+ * @group             :
+ * @last modified on  : 2022-08-29
+ * @last modified by  : hyein.jeon@daeunextier.com
+ * Modifications Log
+ * Ver     Date             Author                   Modification
+ * 1.0   2022-08-29   hyein.jeon@daeunextier.com    Initial Version
  */
+
 
 public with sharing class Opportunity_tr extends TriggerHandler {
     public Opportunity_tr() {

@@ -3,7 +3,7 @@
  */
 
 @IsTest
-public with sharing class AccountChangeHistory_ba_test {
+public with sharing class AccountUpdateHistory_ba_test {
 
     @TestSetup
     public static void testSetup(){
@@ -11,17 +11,13 @@ public with sharing class AccountChangeHistory_ba_test {
         objAccount.Name = 'Test_Account_Hyein';
         objAccount.Description = 'Hello This is Test Description for Account';
         insert objAccount;
-
-
     }
 
     @IsTest
     static void doTest(){
         Test.startTest();
-
-        AccountChangeHistory_ba batch1 = new AccountChangeHistory_ba();
+        AccountUpdateHistory_ba batch1 = new AccountUpdateHistory_ba();
         DataBase.executeBatch(batch1);
-
         Test.stopTest();
 
     }
