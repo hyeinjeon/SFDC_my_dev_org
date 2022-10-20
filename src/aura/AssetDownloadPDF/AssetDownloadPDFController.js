@@ -1,11 +1,12 @@
-/*
-    <Controller>
-        - JavaScript 구현 및 Component의 Event 처리
-*/
+/**
+  * Created by hyein on 2022-10-20.
+      <Controller>
+          - JavaScript 구현 및 Component의 Event 처리
+ */
 
 ({
     fnInit : function(component, event, helper){
-        component.set("v.vfPageUrl" , "/apex/PrintStudentList2?recordId=" + component.get("v.recordId"));
+        component.set("v.vfPageUrl" , "/apex/AssetDownloadPDF?recordId=" + component.get("v.recordId"));
     },
 
     fnCancel : function(component, event, helper){

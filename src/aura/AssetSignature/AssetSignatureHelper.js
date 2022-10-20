@@ -116,55 +116,46 @@
         ctx.clearRect(0, 0, w, h);
     },
 
-    doSave : function(component, event, helper){
-        console.log('doSave execute!');
-        //var pad = component.find('can').getElement();
+    isCanvasEmpty : function(canvas) {
+        const blankCanvas = document.createElement('canvas');
+        blankCanvas.width = canvas.width;
+        blankCanvas.height = canvas.height;
+        return canvas.toDataURL() === blankCanvas.toDataURL();
+    },
+
+    doSave : function(component, event){
         var pad1 = component.find('canvas').getElement();
-        //var dataUrl = pad.toDataURL();
         var dataUrl1 = pad1.toDataURL();
-        //var strDataURI = dataUrl.replace(/^data:image\/(png|jpg);base64,/, "");
         var strDataURI1 = dataUrl1.replace(/^data:image\/(png|jpg);base64,/, "");
         var action = component.get("c.saveSignature");
+
         action.setParams({
             signatureBody : strDataURI1,
             recordId : component.get("v.recordId")
         });
+
         action.setCallback(this,function(response){
-
             var returnVal = response.getReturnValue();
-
             var strStatus = returnVal.strStatus;
+            console.log(strStatus);
             if(strStatus === "SUCCESS"){
                 component.find("notifLib").showToast({
                        "variant":"success",
                        "title": "success",
-                       "mode":"dismissable"
+                       "mode":"dismissable",
+                       "message": "SuccessfullySaved"
                 });
                 $A.get('e.force:refreshView').fire();
-                  var isCommunity = component.get("v.isCommunity");
-                  if(!isCommunity) {
-                      $A.get("e.force:closeQuickAction").fire();
-                  } else {
-                      var evt = component.getEvent("CommunityButtonEvt");
-                      if(evt) {
-                          evt.fire();
-                      } else {
-                          console.log('==============> not event');
-                      }
-                  }
-                                //component.destroy();
+                $A.get("e.force:closeQuickAction").fire();
             } else if(strStatus === "ERROR"){
                 component.find("notifLib").showToast({
                        "variant":"error",
                        "title": "error",
-                       "mode":"dismissable"
+                       "mode":"dismissable",
+                       "message": "ErrorMessage"
                 });
             }
         });
         $A.enqueueAction(action);
-    },
-
-
-
-
+    }
 });

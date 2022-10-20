@@ -7,7 +7,7 @@
 -->
 
 <aura:component description="AssetSignature"
-                implements="force:hasRecordId,force:appHostable,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes"
+                implements="force:hasSObjectName, force:hasRecordId,force:appHostable,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes"
                 access="global"
                 controller="SignatureController">
 
@@ -16,16 +16,17 @@
 
     <ltng:require afterScriptsLoaded="{!c.fnInit}"/>
 
+    <lightning:notificationsLibrary aura:id="notifLib"/>
 
     <aura:html tag="style">
         .slds-modal__container{
         min-width: 70% !important;
         max-width: fit-content !important;
-        padding: 0 20px;
+        padding: 20px;
         }
         .slds-modal__content {
         overflow-y: hidden !important;
-        height: unset !important;
+        height: 80% !important;
         max-height: unset !important;
         }
         .slds-modal__container .slds-modal__header .slds-modal__close {
@@ -40,7 +41,7 @@
 
         <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
             <div class="slds-align_absolute-center">
-                <canvas aura:id="canvas" width="240" height="120"
+                <canvas aura:id="canvas" width="300" height="200"
                         style="border:2px solid; background: white;"></canvas>
                 <lightning:buttonIcon iconName="utility:delete" variant="bare" onclick="{!c.fnErase}"/>
             </div>

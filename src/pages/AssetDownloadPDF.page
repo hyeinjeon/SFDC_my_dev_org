@@ -1,0 +1,29 @@
+<!--
+ - Created by hayle on 2022-10-20.
+ -->
+
+<apex:page id="AssetDownloadPDF" controller="AssetDownloadPDFController" renderAs="pdf">
+    <html>
+    <head>
+        <style>
+        </style>
+    </head>
+    <body>
+    <div class="page">
+        <div style="text-align:center;width:100%;font-size:28px;font-family:'Arial Unicode MS'">계약서</div>
+
+        <table style="border:black solid 1px;border-collapse:collapse;">
+        <apex:repeat value="{!listAsset}" var="obj">
+            <tr>
+                <td style="border:black solid 1px;">{!obj.Name}</td>
+                <td style="border:black solid 1px;">{!obj.ProductCode}</td>
+                <td style="border:black solid 1px;">{!obj.SerialNumber}</td>
+            </tr>
+        </apex:repeat>
+        </table>
+
+
+    </div>
+    </body>
+    </html>
+</apex:page>
