@@ -12,16 +12,24 @@
     <div class="page">
         <div style="text-align:center;width:100%;font-size:28px;font-family:'Arial Unicode MS'">계약서</div>
 
-        <table style="border:black solid 1px;border-collapse:collapse;">
         <apex:repeat value="{!listAsset}" var="obj">
-            <tr>
-                <td style="border:black solid 1px;">{!obj.Name}</td>
-                <td style="border:black solid 1px;">{!obj.ProductCode}</td>
-                <td style="border:black solid 1px;">{!obj.SerialNumber}</td>
-            </tr>
+            <h3>1. Information</h3>
+            <table style="border:black solid 1px;border-collapse:collapse;width: 100%;">
+                <tr>
+                    <td style="border:black solid 1px;height:50px;">Asset Name</td>
+                    <td style="border:black solid 1px;height:50px;">{!obj.Name}</td>
+                </tr>
+                <tr>
+                    <td style="border:black solid 1px;height:50px;">Account Name</td>
+                    <td style="border:black solid 1px;height:50px;">{!obj.Account.Name}</td>
+                </tr>
+            </table>
+            <h3>2. Other Information</h3>
+            <p>Product Code : {!obj.ProductCode}</p>
+            <p>Serial Number : {!obj.SerialNumber}</p>
         </apex:repeat>
-        </table>
 
+        <apex:image url="{!imageURL}"></apex:image>
 
     </div>
     </body>
