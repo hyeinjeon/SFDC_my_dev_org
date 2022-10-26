@@ -1,4 +1,6 @@
-<apex:page standardController="Account" extensions="AccountWeatherController" showHeader="false" sidebar="false">
+<apex:page standardController="Account"
+           extensions="AccountWeatherController"
+           showHeader="false" sidebar="false">
     <!-- 위의 extensions="AccountWeatherController"는 classes의 AccountWeatherController를 참고한다는 뜻이다. -->
     <apex:pageBlock title="{!city} Weather">
         <apex:pageMessages />

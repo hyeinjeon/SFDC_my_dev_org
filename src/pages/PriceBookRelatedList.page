@@ -1,0 +1,50 @@
+<!--
+ - Created by hyein on 2022-10-26.
+ -->
+
+<apex:page id="PriceBookRelatedList"
+           standardController="Pricebook2"
+           extensions="PriceBookRelatedListController">
+
+    <apex:form >
+
+        <apex:pageblock id="PricebookEntryList">
+
+            <div style="margin-left: 30%;"><apex:commandLink value="New Contact" action="{!newContact}" target="_parent" styleClass="btn" style="text-decoration:none;padding:4px;"/></div>
+
+            <br/>
+
+            <apex:pageBlockTable value="{!pricebookEntries}" var="cont" rendered="{!NOT(ISNULL(pricebookEntries))}">
+
+                <apex:column HeaderValue="Action" width="60">
+
+                    <apex:commandLink value="Edit" style="color:#015ba7;" action="{!editContact}" target="_parent" ><apex:param value="{!cont.id}" name="contactId"/>
+
+                    </apex:commandLink>
+
+                    &nbsp;|&nbsp;
+
+                    <apex:commandLink value="Del" onclick="return confirm('Are you sure?')" style="color:#015ba7;" action="{!deleteContact}" target="_parent"><apex:param value="{!cont.id}" name="contactId"/>
+
+                    </apex:commandLink>
+
+                </apex:column>
+
+                <apex:column headerValue="PricebookEntry Name"><apex:outputLink value="/{!cont.id}" target="_blank">{!cont.Name}</apex:outputLink> </apex:column>
+
+                <apex:column value="{!cont.Name}"/>
+
+                <apex:column value="{!cont.ProductCode}"></apex:column>
+
+                <apex:column value="{!cont.Id}"/>
+
+            </apex:pageBlockTable>
+
+            <apex:outputLabel value="No records to display" rendered="{!(ISNULL(pricebookEntries))}" styleClass="noRowsHeader"></apex:outputLabel>
+
+        </apex:pageblock>
+
+    </apex:form>
+
+
+</apex:page>
