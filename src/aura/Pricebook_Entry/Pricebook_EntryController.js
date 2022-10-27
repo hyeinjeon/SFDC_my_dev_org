@@ -22,8 +22,10 @@
         window.parent.location = url;
     },
 
-    fnNewClick : function(component, event, helper) {
-        helper.addProducts(component, event);
+    fnViewAllClick : function(component, event, helper) {
+        var url ="/lightning/r/Pricebook2/" + component.get("v.recordId") + "/related/PricebookEntries/view";
+        window.parent.location = url;
     },
+
 
 });

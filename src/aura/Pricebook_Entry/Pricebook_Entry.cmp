@@ -14,6 +14,12 @@
                 implements="force:appHostable,force:hasRecordId,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global"
                 controller="RelatedEntryController">
 
+    <aura:html tag="style">
+        .slds-card__footer {
+        }
+
+    </aura:html>
+
     <!-- Design 용도 -->
     <aura:attribute name="setHeader"            type="String"   default="Price Book Entries"/>
     <aura:attribute name="setIconName"          type="String"   default="standard:pricebook"/>
@@ -48,42 +54,57 @@
             </header>
         </div>
         <div>
+
             <table class="slds-table slds-table_cell-buffer slds-table_bordered">
                 <thead>
                 <tr class="slds-line-height_reset">
-                    <th class="slds-text-title_caps" scope="col">
-                        <div class="slds-truncate" title="Title">Product Code</div>
+                    <th class="slds-text-title_caps" scope="col" width="30%">
+                        <div class="slds-truncate" title="Product Code">Product Code</div>
                     </th>
-                    <th class="slds-text-title_caps" scope="col">
-                        <div class="slds-truncate" title="File Type">Created Date</div>
+                    <th class="slds-text-title_caps" scope="col" width="40%">
+                        <div class="slds-truncate" title="US Model">US Model</div>
                     </th>
-                    <th class="slds-text-title_caps" scope="col">
-                        <div class="slds-truncate" title="Created By">List Price(USD)</div>
+                    <th class="slds-text-title_caps" scope="col" width="30%">
+                        <div class="slds-truncate" title="List Price">List Price(USD)</div>
                     </th>
                 </tr>
                 </thead>
-                <tbody>
-                <aura:iteration items="{!v.cdList}" var="cd">
-                    <tr>
-                        <th scope="row">
-                            <div class="slds-truncate" title="{!cd.ProductCode}">
-                                <a onclick="{!c.fnViewClick}" data-Id="{!cd.Product2.Id}">{!cd.ProductCode}</a>
-                            </div>
-                        </th>
-                        <th scope="row">
-                            <div class="slds-truncate" title="{!cd.CreatedDate}">
-                                {!cd.CreatedDate}
-                            </div>
-                        </th>
-                        <th scope="row">
-                            <div class="slds-truncate" title="{!cd.UnitPrice}">
-                                <lightning:formattedNumber value="{!cd.UnitPrice}" style="currency" currencyCode="USD" currencyDisplayAs="code"  minimumFractionDigits="1"/>
-                            </div>
-                        </th>
-                    </tr>
-                </aura:iteration>
-                </tbody>
             </table>
+
+            <div class="slds-scrollable" style="height:15rem;width:100%">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <tbody>
+                    <aura:iteration items="{!v.cdList}" var="cd">
+                        <tr>
+                            <th scope="row" width="30%">
+                                <div class="slds-truncate" title="{!cd.ProductCode}">
+                                    <a onclick="{!c.fnViewClick}" data-Id="{!cd.Product2.Id}">{!cd.ProductCode}</a>
+                                </div>
+                            </th>
+                            <th scope="row" width="40%">
+                                <div class="slds-truncate" title="{!cd.Model__c}">
+                                    {!cd.CreatedDate}
+                                </div>
+                            </th>
+                            <th scope="row" width="30%">
+                                <div class="slds-truncate" title="{!cd.UnitPrice}">
+                                    <lightning:formattedNumber value="{!cd.UnitPrice}" style="currency" currencyCode="USD" currencyDisplayAs="code"  minimumFractionDigits="1"/>
+                                </div>
+                            </th>
+                        </tr>
+                    </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <tr>
+                    <td colspan="3" class="slds-card__footer">
+                        <a onclick="{!c.fnViewAllClick}">View All</a>
+                    </td>
+                </tr>
+            </table>
+
         </div>
     </div>
 </aura:component>
