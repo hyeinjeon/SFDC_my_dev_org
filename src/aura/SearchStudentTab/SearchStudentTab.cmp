@@ -1,0 +1,60 @@
+<!--
+ - Created by hayle on 2022-11-02.
+ -->
+
+<aura:component description="SearchStudentTab"
+                controller="SearchStudentController"
+                implements="force:appHostable,force:hasRecordId,forceCommunity:searchInterface,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes">
+
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this}" action="{!c.fnInit}"/>
+    <!-- attributes -->
+    <aura:attribute name="ListContact" type="Contact[]" default="[]"/>
+    <aura:attribute name="ListColumns" type="List" default="[]"/>
+    <aura:attribute name="searchText" type="String" default=""/>
+
+    <aura:attribute name="searchKeywordGrade" type="String" description="use for store student search input"/>
+    <aura:attribute name="searchKeywordClass" type="String" description="use for store student search input"/>
+    <aura:attribute name="searchKeywordName" type="String" description="use for store student search input"/>
+
+    <div class="slds-m-around_medium">
+        <!-- SEARCH INPUT AND SEARCH BUTTON-->
+        <lightning:layout>
+            <lightning:layoutItem size="3" padding="around-small">
+                <lightning:input value="{!v.searchKeywordGrade}"
+                                 placeholder="학년을 입력하시오."
+                                 aura:id="searchField"
+                                 label="학년"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="3" padding="around-small">
+                <lightning:input value="{!v.searchKeywordClass}"
+                                 placeholder="반을 입력하시오."
+                                 aura:id="searchField"
+                                 label="반"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="3" padding="around-small">
+                <lightning:input value="{!v.searchKeywordName}"
+                                 placeholder="이름을 입력하시오."
+                                 aura:id="searchField"
+                                 label="이름"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="2" padding="around-small">
+                <lightning:button onclick="{!c.Search}"
+                                  variant="brand"
+                                  label="Search"
+                                  iconName="utility:search"/>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+
+    <div class="slds-col modal-body divContent scrollable" style="position:relative;min-height:30vh;width:100%;max-height:60vh;overflow-y:auto;">
+        <h1>총 {! v.ListContact.length }  건 </h1>
+        <lightning:datatable
+                keyField="id"
+                data="{! v.ListContact }"
+                columns="{! v.ListColumns }"
+                hideCheckboxColumn="true"
+                showRowNumberColumn="true"/>
+    </div>
+
+</aura:component>
