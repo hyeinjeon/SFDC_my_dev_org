@@ -7,10 +7,10 @@ public with sharing class SearchStudentController {
     public static List <Contact> fetchContacts() {
         //Qyery Contacts
         List<Contact> listContact = [
-                SELECT  Id, Name,
+                SELECT Id, Name,
                         Class__r.Grade__c,
                         Class__r.ClassNumber__c
-                FROM    Contact
+                FROM Contact
         ];
 
         //return list of contacts
@@ -20,29 +20,27 @@ public with sharing class SearchStudentController {
     @AuraEnabled
     public static List <Contact> searchContacts(String searchKeywordGrade, String searchKeywordClass, String searchKeywordName) {
 
-        System.debug('searchGrade: '+ searchKeywordGrade);
-        System.debug('searchClass: '+ searchKeywordClass);
-        System.debug('searchName: '+ searchKeywordName);
+        // Dynamic Query 사용
+        String strQuery = '';
+        strQuery += 'SELECT Id, Name, Class__r.Grade__c, Class__r.ClassNumber__c ';
+        strQuery += 'FROM Contact ';
+        strQuery += 'WHERE Id != Null ';
 
-        String searchGrade = searchKeywordGrade;
-        String searchClass = searchKeywordClass;
-        String searchName =  '%' + searchKeywordName + '%';
+        if(searchKeywordGrade != '') {
+            strQuery += 'AND Class__r.Grade__c = \'' + searchKeywordGrade + '\' ';
+        }
+        if(searchKeywordClass != '') {
+            strQuery += 'AND Class__r.ClassNumber__c = \'' + searchKeywordClass + '\' ';
+        }
+        if(searchKeywordName != '') {
+            strQuery += 'AND Name LIKE \'%' + searchKeywordName + '%\' ';
+        }
 
-        //Qyery Contacts
-        List<Contact> listContact = [
-                SELECT  Id, Name,
-                        Class__r.Grade__c,
-                        Class__r.ClassNumber__c
-                FROM    Contact
-                WHERE   Name LIKE: searchName
-                AND     Class__r.Grade__c =: searchGrade
-                AND     Class__r.ClassNumber__c =: searchClass
-        ];
+        List<Contact> listContact;
+        listContact = Database.query(strQuery);
 
-        System.debug('listContact: '+ listContact);
-
-        //return list of contacts
         return listContact;
+
     }
 
 }

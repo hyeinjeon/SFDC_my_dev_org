@@ -26,9 +26,9 @@
         // 아래 코드 쓰면 setcallback() 함수 안돌아감.
         // setcallback은 백단코드라서 큐에 담긴 프론트코드 먼저 일괄처리돼서 안돌아감.
         // 저장 후 창닫기
-//        $A.get("e.force:closeQuickAction").fire();
+        // $A.get("e.force:closeQuickAction").fire();
         // 새로고침
-//        $A.get("e.force:refreshView").fire();
+        // $A.get("e.force:refreshView").fire();
     },
 
     fnCancel : function(component, event, helper){

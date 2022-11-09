@@ -13,9 +13,9 @@
     <aura:attribute name="ListColumns" type="List" default="[]"/>
     <aura:attribute name="searchText" type="String" default=""/>
 
-    <aura:attribute name="searchKeywordGrade" type="String" description="use for store student search input"/>
-    <aura:attribute name="searchKeywordClass" type="String" description="use for store student search input"/>
-    <aura:attribute name="searchKeywordName" type="String" description="use for store student search input"/>
+    <aura:attribute name="searchKeywordGrade" type="String" default="" description="use for store student search input"/>
+    <aura:attribute name="searchKeywordClass" type="String" default="" description="use for store student search input"/>
+    <aura:attribute name="searchKeywordName" type="String" default="" description="use for store student search input"/>
 
     <div class="slds-m-around_medium">
         <!-- SEARCH INPUT AND SEARCH BUTTON-->
