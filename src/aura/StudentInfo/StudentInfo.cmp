@@ -6,7 +6,9 @@
    1.0      2022-09-07     yr.lee          Create
 *************************************************************************************-->
 
-<aura:component description="StudentInfo" controller="StudentInfoController" implements="force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes">
+<aura:component description="StudentInfo"
+                controller="StudentInfoController"
+                implements="force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes">
     <!-- 변수 선언 -->
     <!--학생(Contact)정보-->
     <aura:attribute  name="objStudent" type="Object" default=""/>

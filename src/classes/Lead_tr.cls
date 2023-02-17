@@ -4,8 +4,12 @@
 
 public with sharing class Lead_tr extends TriggerHandler {
 
+    public Static Integer firstcall = 0;
+
     public Lead_tr() {
-        system.debug('Lead_tr()');
+        system.debug('Lead_tr() : ' + firstcall);
+        firstcall++;
+
         listNew = (List<Lead>) Trigger.new;  // new - before insert, before update 및 before undelete 트리거에서만 사용할 수 있습니다.
         listOld = (List<Lead>) Trigger.old;  // old - update 및 delete
         mapNew = (Map<Id, Lead>) Trigger.newMap; // newMap - before update,after insert,after update 및 after undelete
@@ -17,15 +21,18 @@ public with sharing class Lead_tr extends TriggerHandler {
     private List<Lead> listOld { get; set; }
     private Map<Id, Lead> mapNew { get; set; }
     private Map<Id, Lead> mapOld { get; set; }
-
     public override void beforeInsert(){
-        system.debug('lead-beforeInsert()');
+        system.debug('Lead - beforeInsert()');
         changePhone('beforeInsert');
     }
 
     public override void beforeUpdate(){
-        system.debug('lead-beforeUpdate()');
+        system.debug('Lead - beforeUpdate()');
         changePhone('beforeUpdate');
+    }
+
+    public override void afterUpdate(){
+        system.debug('Lead - afterUpdate()');
     }
 
     public void changePhone(String str) {
@@ -36,10 +43,9 @@ public with sharing class Lead_tr extends TriggerHandler {
 
         for(Lead lead : listNew) {
             phone = lead.Phone;
-            system.debug('phone: '+ phone);
+
             if(phone != null)
             numPhone = phone.replaceAll(regex, '');
-            system.debug('numPhone : ' + numPhone);
 
             lead.Phone = numPhone;
 

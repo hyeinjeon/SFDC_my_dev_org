@@ -1,0 +1,9 @@
+
+
+<apex:page id="ContactRelatedListCheckbox"
+           standardcontroller="Contact"
+           extensions="MyCtrl"
+           recordsetvar="contact"
+           action="{!pageReference}" >
+
+</apex:page>

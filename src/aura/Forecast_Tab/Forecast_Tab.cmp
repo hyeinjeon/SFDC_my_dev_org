@@ -1,0 +1,117 @@
+<!--
+ * @description       : 
+ *                      
+ * @author            : hyein.jeon@daeunextier.com
+ * @group             :
+ * @last modified on  : 2022-12-16
+ * @last modified by  : hyein.jeon@daeunextier.com
+ * Modifications Log
+ * Ver     Date             Author               Modification
+ * 1.0   2022-12-16   hyein.jeon@daeunextier.com   Initial Version
+ -->
+
+<aura:component description="Forecast_Tab"
+                implements="force:appHostable,force:hasRecordId,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes"
+                access="global"
+                controller="ForecastController">
+
+
+    <!-- Design 용도 -->
+    <aura:attribute name="setHeader"     type="String"   default="Forecast > Opportunity Revenue"/>
+    <aura:attribute name="setIconName"   type="String"   default="standard:opportunity"/>
+
+    <!--Attributes-->
+    <aura:attribute name="listForecast" type="List" default="[]"/>
+
+    <!-- Handler -->
+    <aura:handler name="init" value="{!this}" action="{!c.fnInit}"/>
+    <lightning:workspaceAPI aura:id="workspace"/>
+
+    <div class="slds-card slds-card_boundary" style="position:relative">
+        <div class="slds-grid slds-page-header">
+            <header class="slds-media slds-media--center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                  <span class="slds-icon_container slds-icon-standard-opportunity">
+                       <lightning:icon iconName="{!v.setIconName}" size="small" />
+                  </span>
+                </div>
+
+                <div class="slds-media__body">
+                    <h2 class="slds-page-header__title">
+                        <span class="slds-truncate slds-m-right--xx-small" title="{!v.setHeader}" style="font-size : 14px;">
+                            {!v.setHeader}
+                        </span>
+                    </h2>
+                </div>
+
+            </header>
+        </div>
+        <div>
+
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="slds-text-title_caps" scope="col" width="20%" style="background-color:green;color:white;">
+                        <div class="slds-truncate" title="Months">Months</div>
+                    </th>
+                    <th class="slds-text-title_caps" scope="col" width="20%">
+                        <div class="slds-truncate" title="Closed">Closed</div>
+                    </th>
+                    <th class="slds-text-title_caps" scope="col" width="20%">
+                        <div class="slds-truncate" title="Commit">Commit</div>
+                    </th>
+                    <th class="slds-text-title_caps" scope="col" width="20%">
+                        <div class="slds-truncate" title="Best Case">Best Case</div>
+                    </th>
+                    <th class="slds-text-title_caps" scope="col" width="20%">
+                        <div class="slds-truncate" title="Pipeline">Pipeline</div>
+                    </th>
+                </tr>
+                </thead>
+            </table>
+
+            <div class="slds-scrollable" style="height:15rem;width:100%">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <tbody>
+                    <aura:iteration items="{!v.listForecast}" var="fc">
+                        <tr>
+                            <th scope="row" width="20%" style="background-color:green;color:white;">
+                                <div class="slds-truncate" title="{!fc.quarter}">
+                                    <a onclick="{!c.fnViewClick}" data-Id="{!cd.Product2.Id}">{!cd.ProductCode}</a>
+                                    <lightning:formattedText value="{!fc.quarter}" style="text"/>
+                                </div>
+                            </th>
+                            <th scope="row" width="20%">
+                                <div class="slds-truncate" title="{!fc.s}">
+                                    <lightning:formattedNumber value="{!fc.s}" style="currency" minimumFractionDigits="1"/>
+                                </div>
+                            </th>
+                            <th scope="row" width="20%">
+                                <div class="slds-truncate" title="{!fc.commit}">
+                                    <lightning:formattedNumber value="{!fc.commit}" style="currency" minimumFractionDigits="1"/>
+                                </div>
+                            </th>
+                            <th scope="row" width="20%">
+                                <div class="slds-truncate" title="{!fc.bestcase}">
+                                    <lightning:formattedNumber value="{!fc.bestcase}" style="currency" minimumFractionDigits="1"/>
+                                </div>
+                            </th>
+                            <th scope="row" width="20%">
+                                <div class="slds-truncate" title="{!fc.pipeline}">
+                                    <lightning:formattedNumber value="{!fc.pipeline}" style="currency" minimumFractionDigits="1"/>
+                                </div>
+                            </th>
+                        </tr>
+                    </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+</aura:component>

@@ -23,7 +23,6 @@
     <aura:attribute name="recordId" type="String"/> <!-- Contact의 레코드의 Id -->
     <aura:attribute name="selectedClass" type="String"/> <!-- 선택된 학급 -->
     <aura:attribute name="classes" type="List" default="['학급 없음']"/>
-
     <aura:attribute name="columns" type="List"/>
 
     <div class="slds-col modal-header slds-modal__header">
