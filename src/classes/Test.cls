@@ -1,14 +1,18 @@
-Map<Id, Account> mapAccount = Map<Id, Account>([
-        SELECT Id, Name
-        FROM Account
-        WHERE Name =: ''
-]);
+public class AsyncExecutionExample implements Queueable {
+        public void execute(QueueableContext context) {
+                Account a = new Account(Name='Acme', Phone='(415) 555-1212');
+                insert a;
+        }
+}
 
+ID jobID = System.enqueueJob(new AsyncExecutionExample());
+AsyncApexJob jobInfo = [SELECT Status, NumberOfErrors FROM AsyncApexJob WHERE Id =: jobID];
 
-// Populate map from SOQL query
-Map<Id, Account> m = new Map<Id, Account>([SELECT Id, Name FROM Account LIMIT 10]);
-// After populating the map, iterate through the map entries
-for (Id idKey : m.keySet()) {
-        Account a = m.get(idKey);
-        System.debug(a);
+public class AsyncExecutionExample implements Queueable {
+        public void execute(QueueableContext context) {
+                // Your processing logic here
+
+                // Chain this job to next job by submitting the next job
+                System.enqueueJob(new SecondJob());
+        }
 }
