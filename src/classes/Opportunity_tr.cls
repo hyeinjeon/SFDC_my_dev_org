@@ -35,7 +35,7 @@ public with sharing class Opportunity_tr extends TriggerHandler {
     }
 
     public override void beforeUpdate() {
-        system.debug('opp - beforeUpdate');
+        System.debug('opp - beforeUpdate');
         CustomValidation('beforeUpdate');
         createQuoteLineItems();
     }

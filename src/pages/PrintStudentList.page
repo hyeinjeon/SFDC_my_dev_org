@@ -1,4 +1,6 @@
-<apex:page id="PrintStudentList" controller="PrintStudentListController" renderAs="pdf">
+<apex:page id="PrintStudentList"
+           controller="PrintStudentListController"
+           renderAs="pdf">
     <html>
     <head>
         <style>

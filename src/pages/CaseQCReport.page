@@ -1,0 +1,168 @@
+<!--
+ - Created by hyein.jeon@daeunextier.com on 2023-05-04.
+ -->
+
+<apex:page id="CaseQCReport"
+           controller="PrintQCReportController"
+           renderAs="pdf">
+    <html>
+    <head>
+        <style>
+            .page {
+                width : 850px;
+                height : 1130px;
+                font-family: 'Arial Unicode MS';
+            }
+            @page {
+                size: A4;
+                margin 0;
+            }
+            table, th, tr, td {
+                table-layout: fixed;
+                border-collapse: collapse;
+                border: solid 1px black;
+                font-size : 10pt;
+            }
+            table {
+                width: 700px;
+                height: 800px;
+            }
+            .body{
+                font-family: 'Arial Unicode MS';
+            }
+            div.onepage {
+                page-break-before: always;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="page">
+        <div style="margin-top:30px;font-family:'Arial Unicode MS';font-size:15px; text-align:center;">
+            <table style="border:black solid 0.5px; border-collapse:collapse; width: 700px;">
+                <tr>
+                    <td rowspan="2" colspan="10" style="border:black solid 1px;font-size:30px;" width="55%">QC(Service) Report</td>
+                    <td colspan="4" style="border:black solid 1px;font-size:17px;" width="15%" height="40px;">Write</td>
+                    <td colspan="3" style="border:black solid 1px;font-size:17px;" width="15%">Review</td>
+                    <td colspan="3" style="border:black solid 1px;font-size:17px;" width="15%">Approval</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="border:black solid 1px;" height="60px;">{!listCase.Contact.Name}</td>
+                    <td colspan="3" style="border:black solid 1px;">/</td>
+                    <td colspan="3" style="border:black solid 1px;">{!caseOwnerName}</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" style="border:black solid 1px;" width="20%">Country/<br/>Company(Clinic)</td>
+                    <td colspan="11" style="border:black solid 1px;" width="40%">test data</td>
+                    <td colspan="2" style="border:black solid 1px;" width="10%">MODEL</td>
+                    <td colspan="6" style="border:black solid 1px;" width="30%">test data</td>
+                </tr>
+                <tr>
+                    <td colspan="11" style="border:black solid 1px;">test data</td>
+                    <td colspan="2" style="border:black solid 1px;">S/N</td>
+                    <td colspan="6" style="border:black solid 1px;">test data</td>
+                </tr>
+                <tr>
+                    <td style="border:black solid 1px;">Classification</td>
+                    <td colspan="19" style="border:black solid 1px;">A/S( true ) B/S( false ) Return and After ( false ) Issuance of CAPA (refer the below)</td>
+                </tr>
+                <tr>
+                    <td style="border:black solid 1px;">Issue Date</td>
+                    <td colspan="8" style="border:black solid 1px;">{!caseCreatedDate}</td>
+                    <td colspan="3" style="border:black solid 1px;">The person in charge</td>
+                    <td colspan="4" style="border:black solid 1px;">Galip Keleş</td>
+                    <td style="border:black solid 1px;">T-Pulse</td>
+                    <td colspan="3" style="border:black solid 1px;">test data</td>
+                </tr>
+                <tr>
+                    <td style="border:black solid 1px;width=100px;">Manufacturing Date</td>
+                    <td colspan="8" style="border:black solid 1px;">{!caseCreatedDate}</td>
+                    <td colspan="3" style="border:black solid 1px;">Operation<br/>Time</td>
+                    <td colspan="4" style="border:black solid 1px;">test data</td>
+                    <td style="border:black solid 1px;">L-Pulse</td>
+                    <td colspan="3" style="border:black solid 1px;">test data</td>
+                </tr>
+                <tr>
+                    <td style="border:black solid 1px;">Issue (Symptom)</td>
+                    <td colspan="19" style="border:black solid 1px;">{!listCase.Description}</td>
+                </tr>
+                <tr>
+                    <td style="border:black solid 1px;">Cause &amp; Request</td>
+                    <td colspan="19" style="border:black solid 1px;">test data</td>
+                </tr>
+                <tr>
+                    <td style="border:black solid 1px;">Category</td>
+                    <td colspan="19" style="border:black solid 1px;">Processing contents</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" style="border:black solid 1px;">Processing results</td>
+                    <td colspan="19" style="border:black solid 1px;">After replacing the U12cartridge, the equipment is normal operation</td>
+                </tr>
+                <tr>
+                    <td colspan="11" style="border:black solid 1px;">test data</td>
+                    <td colspan="6" style="border:black solid 1px;">Amount:  $   free</td>
+                    <td colspan="2" style="border:black solid 1px;">(Sign)</td>
+                </tr>
+                <tr>
+                    <td style="border:black solid 1px;">Info. Evaluation</td>
+                    <td colspan="19" style="border:black solid 1px;">Customer Complaint ( false )   Simple Measures ( true )   Reporting Measures ( false )</td>
+                </tr>
+                <tr>
+                    <td rowspan="3" style="border:black solid 1px;">Validation Check</td>
+                    <td colspan="19" style="border:black solid 1px;">Issuace of CAPA ( false )    CAPA N/A ( false )    Correction Unable( false )</td>
+                </tr>
+                <tr>
+                    <td colspan="19" style="border:black solid 1px;">Hazardous Cases Reporting Measures ( false )     Inapplicable Hazaradous Cases ( false )</td>
+                </tr>
+                <tr>
+                    <td colspan="19" style="border:black solid 1px;">Potential Danger of Accident ( false )    Side Effect, Abnormality-Case ( false )     N/A ( true )</td>
+                </tr>
+                <tr>
+                    <td rowspan="4" style="border:black solid 1px;width=100px;">Equipment Held<br/>B/S history</td>
+                    <td colspan="5" style="border:black solid 1px;">S/N</td>
+                    <td colspan="3" style="border:black solid 1px;">Time</td>
+                    <td colspan="2" style="border:black solid 1px;">T-pulse</td>
+                    <td colspan="2" style="border:black solid 1px;">L-Pulse</td>
+                    <td colspan="7" style="border:black solid 1px;">Result</td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="border:black solid 1px;">test data</td>
+                    <td colspan="3" style="border:black solid 1px;">test data</td>
+                    <td colspan="2" style="border:black solid 1px;">test data</td>
+                    <td colspan="2" style="border:black solid 1px;">test data</td>
+                    <td colspan="7" style="border:black solid 1px;">test data</td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="border:black solid 1px;">test data</td>
+                    <td colspan="3" style="border:black solid 1px;">test data</td>
+                    <td colspan="2" style="border:black solid 1px;">test data</td>
+                    <td colspan="2" style="border:black solid 1px;">test data</td>
+                    <td colspan="7" style="border:black solid 1px;">test data</td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="border:black solid 1px;">test data</td>
+                    <td colspan="3" style="border:black solid 1px;">test data</td>
+                    <td colspan="2" style="border:black solid 1px;">test data</td>
+                    <td colspan="2" style="border:black solid 1px;">test data</td>
+                    <td colspan="7" style="border:black solid 1px;">test data</td>
+                </tr>
+                <tr>
+                    <td style="border:black solid 1px;" height="200px;">Picture of Informaion</td>
+                    <td colspan="19" style="border:black solid 1px;" height="200px;">test data</td>
+                </tr>
+                <tr>
+                    <td style="border:black solid 1px;">Inspector</td>
+                    <td colspan="9" style="border:black solid 1px;">Date : {!caseCreatedDate}</td>
+                    <td colspan="7" style="border:black solid 1px;">Name : {!listCase.Contact.Name}</td>
+                    <td colspan="3" style="border:black solid 1px;"> sign </td>
+                </tr>
+            </table>
+
+            <div style="float:left;font-size:10px;padding:5px;" >WTF-802-03(Rev.0)</div>
+            <div style="float:right;font-size:10px;padding:5px;" >WON TECH Co., Ltd.</div>
+
+        </div>
+    </div>
+    </body>
+    </html>
+
+</apex:page>

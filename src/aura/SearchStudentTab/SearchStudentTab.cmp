@@ -18,6 +18,7 @@
     <aura:attribute name="searchKeywordClass" type="String" default="" description="use for store student search input"/>
     <aura:attribute name="searchKeywordName" type="String" default="" description="use for store student search input"/>
 
+
     <div class="slds-m-around_medium">
         <!-- SEARCH INPUT AND SEARCH BUTTON-->
         <lightning:layout>
